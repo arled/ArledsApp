@@ -2,7 +2,7 @@
 
 ## Build app
 
-> `yarn clean-install` > <br/>
+> `yarn clean-install` <br/>
 >
 > If that doesn't work run: `yarn && npx pod-install`
 
