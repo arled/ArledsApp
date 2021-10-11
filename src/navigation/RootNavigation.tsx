@@ -16,7 +16,7 @@ const RootNavigation = () => {
 
   return (
     <RootStack.Navigator screenOptions={{ headerBackTitle: BACK_TITLE }}>
-      <RootStack.Screen name={`Arled's App`} component={Home} />
+      <RootStack.Screen name={Route.HOME} component={Home} options={{ headerShown: false }} />
       <RootStack.Screen
         name={Route.PRODUCTS}
         component={Products}

@@ -7,6 +7,7 @@ import { ScrollView } from '../../components/ScrollView';
 import { RouteStackParamList, Route } from '../../navigation';
 import { CartContext } from '../../store/CartContext';
 import { ProductItem } from '../../components/ProductItem';
+import { PrimaryButton } from '../../components/Buttons';
 
 type ShoppingCartScreenNavigationProp = StackNavigationProp<
   RouteStackParamList,
@@ -19,7 +20,7 @@ type Props = {
 };
 
 const ShoppingCart: FC<Props> = ({}) => {
-  const { cartItems } = useContext(CartContext);
+  const { cartItems, setCartItems } = useContext(CartContext);
   const [totalPrice, setTotalPrice] = useState<number>(0);
 
   useEffect(() => {
@@ -29,13 +30,18 @@ const ShoppingCart: FC<Props> = ({}) => {
     }
   }, [cartItems, setTotalPrice]);
 
+  const handleOnDelete = (item: Product) => {
+    setCartItems(cartItems.filter((ci: Product) => ci.id != item.id));
+  };
+
   return (
     <ScrollView footer={<Text style={styles.totalPrice}>Total: £{totalPrice.toFixed(2)}</Text>}>
       {cartItems && cartItems.length > 0 ? (
-        cartItems.map((item: Product) => {
+        cartItems.map((item: Product, key: number) => {
           return (
-            <View style={styles.container}>
+            <View key={`${item.id}-${key}`} style={styles.container}>
               <ProductItem product={item} />
+              <PrimaryButton title="Remove" onPress={() => handleOnDelete(item)} />
             </View>
           );
         })

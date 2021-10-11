@@ -22,8 +22,12 @@ const Products: FC<Props> = ({}) => {
   const [products, setProducts] = useState<Array<Product>>([]);
 
   const handleGetProducts = useCallback(async () => {
-    const data = await getAllProducts();
-    setProducts(data);
+    try {
+      const data = await getAllProducts();
+      setProducts(data);
+    } catch (err) {
+      console.log(err);
+    }
   }, [getAllProducts, setProducts]);
 
   useEffect(() => {
@@ -31,7 +35,10 @@ const Products: FC<Props> = ({}) => {
   }, [handleGetProducts]);
 
   const handleOnPress = (item: Product) => {
-    setCartItems([...cartItems, item]);
+    const isProductInCart = cartItems.find((i: Product) => i.id === item.id);
+    if (!isProductInCart) {
+      setCartItems([...cartItems, item]);
+    }
   };
 
   return (
