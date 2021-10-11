@@ -6,13 +6,11 @@ interface props {
   onPress: () => void;
 }
 
-const TextButton: FC<props> = ({ title, onPress }) => {
-  return (
-    <TouchableOpacity onPress={onPress} style={styles.button}>
-      <Text style={styles.text}>{title}</Text>
-    </TouchableOpacity>
-  );
-};
+const TextButton: FC<props> = ({ title, onPress }) => (
+  <TouchableOpacity onPress={onPress} style={styles.button}>
+    <Text style={styles.text}>{title}</Text>
+  </TouchableOpacity>
+);
 
 const styles = StyleSheet.create({
   button: {

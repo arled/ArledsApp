@@ -5,33 +5,31 @@ interface Props {
   product: Product;
 }
 
-const ProductItem: FC<Props> = ({ product }) => {
-  return (
-    <View style={styles.product}>
-      <View style={styles.imageContainer}>
-        <Image
-          style={styles.image}
-          source={{
-            uri: product.img,
-          }}
-        />
-      </View>
-
-      <View style={styles.infoContainer}>
-        <Text style={styles.normal}>{product.name} </Text>
-
-        <Text style={styles.normal}>
-          <Text style={styles.bold}>£</Text>
-          {product.price}{' '}
-        </Text>
-
-        <Text style={styles.normal}>
-          <Text style={styles.bold}>Color: </Text> {product.colour}
-        </Text>
-      </View>
+const ProductItem: FC<Props> = ({ product }) => (
+  <View style={styles.product}>
+    <View style={styles.imageContainer}>
+      <Image
+        style={styles.image}
+        source={{
+          uri: product.img,
+        }}
+      />
     </View>
-  );
-};
+
+    <View style={styles.infoContainer}>
+      <Text style={styles.normal}>{product.name} </Text>
+
+      <Text style={styles.normal}>
+        <Text style={styles.bold}>£</Text>
+        {product.price}{' '}
+      </Text>
+
+      <Text style={styles.normal}>
+        <Text style={styles.bold}>Color: </Text> {product.colour}
+      </Text>
+    </View>
+  </View>
+);
 
 const styles = StyleSheet.create({
   container: {
