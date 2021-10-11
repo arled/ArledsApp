@@ -18,7 +18,7 @@ const Home: FC<Props> = ({ navigation }) => {
   return (
     <ScrollView
       footer={<PrimaryButton onPress={() => navigation.navigate(Route.PRODUCTS)} title="Start" />}>
-      <Text style={styles.Text}>Welcome to Arled's eCommerce tech task app.</Text>
+      <Text style={styles.Text}>Welcome to Arled's eCommerce app.</Text>
       <Text style={styles.Text}>Tap start to continue.</Text>
     </ScrollView>
   );
