@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 
-interface Props {
+interface ProductItemProps {
   product: Product;
 }
 
-const ProductItem: FC<Props> = ({ product }) => (
+const ProductItem: FC<ProductItemProps> = ({ product }) => (
   <View style={styles.product}>
     <View style={styles.imageContainer}>
       <Image
@@ -32,9 +32,6 @@ const ProductItem: FC<Props> = ({ product }) => (
 );
 
 const styles = StyleSheet.create({
-  container: {
-    marginBottom: 20,
-  },
   product: {
     flex: 1,
     flexDirection: 'row',

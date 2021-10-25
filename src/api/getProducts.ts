@@ -8,7 +8,7 @@ const getAllProducts = async (): Promise<any> => {
       await api.get(PRODUCTS_ENDPOINT)
     ).data;
   } catch (error) {
-    throw error;
+    console.log(error);
   }
 };
 

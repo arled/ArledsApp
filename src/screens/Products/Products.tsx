@@ -12,29 +12,26 @@ import { ProductItem } from '../../components/ProductItem';
 
 type ProductsScreenNavigationProp = StackNavigationProp<RouteStackParamList, Route.PRODUCTS>;
 
-type Props = {
+type ProductsProps = {
   navigation: ProductsScreenNavigationProp;
   route: RouteProp<RouteStackParamList, Route.PRODUCTS>;
 };
 
-const Products: FC<Props> = ({}) => {
+const Products: FC<ProductsProps> = ({}) => {
   const { cartItems, setCartItems } = useContext(CartContext);
   const [products, setProducts] = useState<Array<Product>>([]);
 
-  const handleGetProducts = useCallback(async () => {
-    try {
-      const data = await getAllProducts();
-      setProducts(data);
-    } catch (err) {
-      console.log(err);
-    }
+  // TODO: Move to a custom hook.
+  const getProducts = useCallback(async () => {
+    const data = await getAllProducts();
+    setProducts(data);
   }, [getAllProducts, setProducts]);
 
   useEffect(() => {
-    handleGetProducts();
-  }, [handleGetProducts]);
+    getProducts();
+  }, [getProducts]);
 
-  const handleOnPress = (item: Product) => {
+  const onPress = (item: Product) => {
     const isProductInCart = cartItems.find((i: Product) => i.id === item.id);
     if (!isProductInCart) {
       setCartItems([...cartItems, item]);
@@ -48,7 +45,7 @@ const Products: FC<Props> = ({}) => {
           return (
             <View key={product.id} style={styles.container}>
               <ProductItem product={product} />
-              <PrimaryButton title="Add to basket" onPress={() => handleOnPress(product)} />
+              <PrimaryButton title="Add to basket" onPress={() => onPress(product)} />
             </View>
           );
         })

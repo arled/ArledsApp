@@ -1,14 +1,14 @@
 import React, { FC, ReactElement } from 'react';
 import { SafeAreaView, ScrollView as SV, StyleSheet, View } from 'react-native';
 
-interface props {
+interface ScrollViewProps {
   footer?: ReactElement;
 }
 
-const ScrollView: FC<props> = ({ children, footer }) => {
+const ScrollView: FC<ScrollViewProps> = ({ children, footer }) => {
   return (
     <SafeAreaView style={styles.safeArea}>
-      <SV style={styles.ScrollView} contentInsetAdjustmentBehavior="automatic">
+      <SV contentInsetAdjustmentBehavior="automatic">
         <View style={styles.wrapper}>{children}</View>
       </SV>
       {footer ? <View style={styles.footer}>{footer}</View> : null}
@@ -20,11 +20,7 @@ const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
   },
-  ScrollView: {
-    // flex: 1,
-  },
   wrapper: {
-    // flex: 1,
     margin: 20,
   },
   footer: {
