@@ -40,15 +40,13 @@ const Products: FC<ProductsProps> = ({}) => {
 
   return (
     <ScrollView>
-      {products && products.length > 0 ? (
-        products?.map((product) => {
-          return (
-            <View key={product.id} style={styles.container}>
-              <ProductItem product={product} />
-              <PrimaryButton title="Add to basket" onPress={() => onPress(product)} />
-            </View>
-          );
-        })
+      {products && products.length !== 0 ? (
+        products?.map((product) => (
+          <View key={product.id} style={styles.container}>
+            <ProductItem product={product} />
+            <PrimaryButton title="Add to basket" onPress={() => onPress(product)} />
+          </View>
+        ))
       ) : (
         <Text>Loading...</Text>
       )}

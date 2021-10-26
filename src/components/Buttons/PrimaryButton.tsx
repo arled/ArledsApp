@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color: '#ECF0F1',
   },
-
   wrapper: {
     margin: 20,
   },
