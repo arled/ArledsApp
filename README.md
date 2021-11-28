@@ -16,6 +16,17 @@
 
 ## App screenshots
 
-<img src="./assets/app_screenshots/homeScreen.png" width="150" />
-<img src="./assets/app_screenshots/productsScreen.png" width="150" />
-<img src="./assets/app_screenshots/cartScreen.png" width="150" />
+<div>
+    <div style="float:left;margin-right:5px;">
+        <img src="./assets/app_screenshots/homeScreen.png" width="150"  />
+        <p>Home screen</p>
+    </div>
+    <div style="float:left;margin-right:5px;">
+        <img class="middle-img" src="./assets/app_screenshots/productsScreen.png" width="150" />
+        <p>Products screen</p>
+    </div>
+    <div style="float:left;margin-right:5px;">
+        <img src="./assets/app_screenshots/cartScreen.png" width="150" />
+        <p>Cart screen</p>
+    </div>
+</div>
