@@ -13,3 +13,9 @@
 ## Run Android app
 
 > `yarn android`
+
+## App screenshots
+
+<img src="./assets/app_screenshots/homeScreen.png" width="150" />
+<img src="./assets/app_screenshots/productsScreen.png" width="150" />
+<img src="./assets/app_screenshots/cartScreen.png" width="150" />
