@@ -16,16 +16,16 @@
 
 ## App screenshots
 
-<div>
-    <div style="float:left;margin-right:5px;">
+<div style="width: 100%;" >
+    <div style="float:left">
         <img src="./assets/app_screenshots/homeScreen.png" width="150"  />
         <p>Home screen</p>
     </div>
-    <div style="float:left;margin-right:5px;">
+    <div style="float:left">
         <img class="middle-img" src="./assets/app_screenshots/productsScreen.png" width="150" />
         <p>Products screen</p>
     </div>
-    <div style="float:left;margin-right:5px;">
+    <div style="float:left">
         <img src="./assets/app_screenshots/cartScreen.png" width="150" />
         <p>Cart screen</p>
     </div>
