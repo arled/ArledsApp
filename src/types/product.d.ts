@@ -1,7 +1,7 @@
 type Product = {
   id: number;
-  colour: string;
-  name: string;
+  title: string;
+  description: string;
   price: number;
-  img: string;
+  image: string;
 };

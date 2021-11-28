@@ -1,37 +1,30 @@
 import React, { FC } from 'react';
-import { StyleSheet, TouchableOpacity, Text } from 'react-native';
+
+import { styled } from '../../theming';
 
 interface PrimaryButtonProps {
-  title?: string;
+  title: string;
   onPress: () => void;
 }
 
 const PrimaryButton: FC<PrimaryButtonProps> = ({ title, onPress }) => {
   return (
-    <TouchableOpacity onPress={onPress} style={styles.button}>
-      <Text style={styles.text}>{title}</Text>
+    <TouchableOpacity onPress={onPress}>
+      <Text>{title}</Text>
     </TouchableOpacity>
   );
 };
 
-const styles = StyleSheet.create({
-  button: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#C0392B',
-    padding: 7,
-    borderRadius: 5,
-    backgroundColor: '#E74C3C',
-  },
-  text: {
-    fontSize: 17,
-    fontWeight: '700',
-    color: '#ECF0F1',
-  },
-  wrapper: {
-    margin: 20,
-  },
-});
+const TouchableOpacity = styled.TouchableOpacity`
+  align-items: center;
+  justify-content: center;
+  padding: ${({ theme }) => theme.paddings.sm}px;
+  background-color: ${({ theme }) => theme.colors.buttonPrimaryBackground};
+  border-radius: 5px;
+`;
 
+const Text = styled.Text`
+  font-size: ${({ theme }) => theme.fontSizes.md}px;
+  font-weight: 600;
+`;
 export { PrimaryButton };

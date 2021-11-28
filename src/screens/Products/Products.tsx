@@ -1,14 +1,15 @@
-import React, { FC, useCallback, useEffect, useState, useContext } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React, { FC, useEffect, useContext } from 'react';
+import { ActivityIndicator, Pressable } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RouteProp } from '@react-navigation/native';
 
 import { ScrollView } from '../../components/ScrollView';
 import { RouteStackParamList, Route } from '../../navigation';
-import { getAllProducts } from '../../api/getProducts';
-import { PrimaryButton } from '../../components/Buttons';
+import { useProducts } from '../../hooks/useProducts';
+import { NavigationHeader } from '../../components/NavigationHeader';
 import { CartContext } from '../../store/CartContext';
 import { ProductItem } from '../../components/ProductItem';
+import { styled, useTheme } from '../../theming';
 
 type ProductsScreenNavigationProp = StackNavigationProp<RouteStackParamList, Route.PRODUCTS>;
 
@@ -17,21 +18,16 @@ type ProductsProps = {
   route: RouteProp<RouteStackParamList, Route.PRODUCTS>;
 };
 
-const Products: FC<ProductsProps> = ({}) => {
+const Products: FC<ProductsProps> = ({ navigation }) => {
+  const { products, loadProducts } = useProducts();
   const { cartItems, setCartItems } = useContext(CartContext);
-  const [products, setProducts] = useState<Array<Product>>([]);
-
-  // TODO: Move to a custom hook.
-  const getProducts = useCallback(async () => {
-    const data = await getAllProducts();
-    setProducts(data);
-  }, [getAllProducts, setProducts]);
+  const theme = useTheme();
 
   useEffect(() => {
-    getProducts();
-  }, [getProducts]);
+    loadProducts();
+  }, []);
 
-  const onPress = (item: Product) => {
+  const onActionPress = (item: Product) => {
     const isProductInCart = cartItems.find((i: Product) => i.id === item.id);
     if (!isProductInCart) {
       setCartItems([...cartItems, item]);
@@ -39,46 +35,56 @@ const Products: FC<ProductsProps> = ({}) => {
   };
 
   return (
-    <ScrollView>
-      {products && products.length !== 0 ? (
-        products?.map((product) => (
-          <View key={product.id} style={styles.container}>
-            <ProductItem product={product} />
-            <PrimaryButton title="Add to basket" onPress={() => onPress(product)} />
-          </View>
-        ))
-      ) : (
-        <Text>Loading...</Text>
-      )}
-    </ScrollView>
+    <>
+      {/* <SafeAreaView backgroundColor /> */}
+      <ScrollView
+        header={
+          <NavigationHeader
+            onBackPress={() => navigation.goBack()}
+            title={'Products'}
+            rightItem={
+              <Pressable onPress={() => navigation.navigate(Route.SHOPPING_CART)}>
+                <Text>{`Cart (${cartItems?.length > 0 ? cartItems?.length : 0}) `}</Text>
+              </Pressable>
+            }
+          />
+        }>
+        <ViewContainer>
+          {products && products.length !== 0 ? (
+            products?.map((product, id) => (
+              <ProductItem
+                key={id}
+                product={product}
+                onActionPress={onActionPress}
+                actionTitle="Add to cart"
+                showDescription
+              />
+            ))
+          ) : (
+            <View>
+              <ActivityIndicator color={theme.colors.activityIndicator} />
+            </View>
+          )}
+        </ViewContainer>
+      </ScrollView>
+    </>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    marginBottom: 20,
-  },
-  product: {
-    flex: 1,
-    flexDirection: 'row',
-    backgroundColor: '#d7dbdd',
-    borderRadius: 5,
-  },
+const ViewContainer = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`;
 
-  bold: {
-    fontSize: 17,
-    fontWeight: '700',
-  },
-  normal: {
-    fontSize: 17,
-  },
-  image: {
-    height: 80,
-    width: 80,
-    resizeMode: 'contain',
-  },
-  imageContainer: { padding: 5 },
-  infoContainer: { padding: 5, flex: 1 },
-});
+const Text = styled.Text`
+  font-size: ${({ theme }) => theme.fontSizes.md}px;
+`;
+
+const View = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`;
 
 export { Products };

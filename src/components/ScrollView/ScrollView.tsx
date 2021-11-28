@@ -1,31 +1,36 @@
 import React, { FC, ReactElement } from 'react';
-import { SafeAreaView, ScrollView as SV, StyleSheet, View } from 'react-native';
 
+import { styled } from '../../theming';
 interface ScrollViewProps {
+  header?: ReactElement;
   footer?: ReactElement;
 }
 
-const ScrollView: FC<ScrollViewProps> = ({ children, footer }) => {
+const ScrollView: FC<ScrollViewProps> = ({ children, header, footer }) => {
   return (
-    <SafeAreaView style={styles.safeArea}>
-      <SV contentInsetAdjustmentBehavior="automatic">
-        <View style={styles.wrapper}>{children}</View>
+    <>
+      {header ? header : null}
+      <SV contentContainerStyle={{ flexGrow: 1 }} contentInsetAdjustmentBehavior="automatic">
+        <ViewContentWrapper>{children}</ViewContentWrapper>
       </SV>
-      {footer ? <View style={styles.footer}>{footer}</View> : null}
-    </SafeAreaView>
+      {footer ? <ViewFooterWrapper>{footer}</ViewFooterWrapper> : null}
+    </>
   );
 };
 
-const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-  },
-  wrapper: {
-    margin: 20,
-  },
-  footer: {
-    margin: 20,
-  },
-});
+const SV = styled.ScrollView`
+  flex: 1;
+`;
+
+const ViewContentWrapper = styled.View`
+  margin: ${({ theme }) => theme.paddings.md}px;
+  flex: 1;
+`;
+
+const ViewFooterWrapper = styled.View`
+  justify-content: center;
+  margin: ${({ theme }) =>
+    `${theme.paddings.lg}px ${theme.paddings.lg}px ${theme.paddings.xxl}px ${theme.paddings.lg}px`};
+`;
 
 export { ScrollView };

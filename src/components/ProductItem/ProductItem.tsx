@@ -1,58 +1,81 @@
 import React, { FC } from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { PrimaryButton } from '../Buttons';
+import { styled } from '../../theming';
 
 interface ProductItemProps {
   product: Product;
+  onActionPress?: (product: Product) => void;
+  actionTitle?: string;
+  showDescription?: boolean;
 }
 
-const ProductItem: FC<ProductItemProps> = ({ product }) => (
-  <View style={styles.product}>
-    <View style={styles.imageContainer}>
+const ProductItem: FC<ProductItemProps> = ({
+  product,
+  onActionPress,
+  actionTitle,
+  showDescription,
+}) => {
+  return (
+    <ViewWrapper>
       <Image
-        style={styles.image}
         source={{
-          uri: product.img,
+          uri: product.image,
         }}
       />
-    </View>
+      <ViewContainer>
+        <TextTitle>{product.title}</TextTitle>
+        <TextPrice>£{product.price}</TextPrice>
+        {showDescription ? <TextDescription>{product.description}</TextDescription> : null}
+        {onActionPress && actionTitle ? (
+          <PrimaryButtonContainer>
+            <PrimaryButton title={actionTitle} onPress={() => onActionPress(product)} />
+          </PrimaryButtonContainer>
+        ) : null}
+      </ViewContainer>
+    </ViewWrapper>
+  );
+};
 
-    <View style={styles.infoContainer}>
-      <Text style={styles.normal}>{product.name} </Text>
+const ViewWrapper = styled.View`
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border-width: 2px;
+  border-color: ${({ theme }) => theme.colors.border};
+  padding: ${({ theme }) => theme.paddings.sm}px;
+  background-color: ${({ theme }) => theme.colors.appBackground};
+  flex-direction: row;
+  justify-content: flex-end;
+`;
 
-      <Text style={styles.normal}>
-        <Text style={styles.bold}>£</Text>
-        {product.price}{' '}
-      </Text>
+const ViewContainer = styled.View`
+  flex: 1;
+  margin-left: ${({ theme }) => theme.margins.sm}px;
+`;
 
-      <Text style={styles.normal}>
-        <Text style={styles.bold}>Color: </Text> {product.colour}
-      </Text>
-    </View>
-  </View>
-);
+const Image = styled.Image`
+  height: 80px;
+  width: 80px;
+  resize-mode: contain;
+`;
 
-const styles = StyleSheet.create({
-  product: {
-    flex: 1,
-    flexDirection: 'row',
-    backgroundColor: '#d7dbdd',
-    borderRadius: 5,
-  },
+const TextTitle = styled.Text`
+  text-transform: uppercase;
+  font-size: ${({ theme }) => theme.fontSizes.md}px;
+`;
 
-  bold: {
-    fontSize: 17,
-    fontWeight: '700',
-  },
-  normal: {
-    fontSize: 17,
-  },
-  image: {
-    height: 80,
-    width: 80,
-    resizeMode: 'contain',
-  },
-  imageContainer: { padding: 5 },
-  infoContainer: { padding: 5, flex: 1 },
-});
+const TextPrice = styled.Text`
+  font-size: ${({ theme }) => theme.fontSizes.md}px;
+  font-weight: 600;
+  color: ${({ theme }) => theme.colors.price};
+  margin-vertical: ${({ theme }) => theme.margins.sm}px;
+`;
+
+const TextDescription = styled.Text`
+  font-size: ${({ theme }) => theme.fontSizes.sm}px;
+`;
+
+const PrimaryButtonContainer = styled.View`
+  margin-top: ${({ theme }) => theme.margins.sm}px;
+`;
 
 export { ProductItem };
