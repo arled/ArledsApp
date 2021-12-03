@@ -4,9 +4,7 @@ import { getProducts } from '../api/getProducts';
 const useProducts = () => {
   const [products, setProducts] = useState<Array<Product>>([]);
   const loadProducts = async () => {
-    const data = await getProducts();
-    setProducts(data);
-    return data;
+    setProducts(await getProducts());
   };
 
   return { products, loadProducts };
