@@ -5,12 +5,13 @@ import { styled } from '../../theming';
 interface PrimaryButtonProps {
   title: string;
   onPress: () => void;
+  testID?: string;
 }
 
-const PrimaryButton: FC<PrimaryButtonProps> = ({ title, onPress }) => {
+const PrimaryButton: FC<PrimaryButtonProps> = ({ title, onPress, testID }) => {
   return (
-    <TouchableOpacity onPress={onPress}>
-      <Text>{title}</Text>
+    <TouchableOpacity testID={testID} onPress={onPress}>
+      <Text testID="button-title">{title}</Text>
     </TouchableOpacity>
   );
 };

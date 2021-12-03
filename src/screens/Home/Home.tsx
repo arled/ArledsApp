@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { RouteProp } from '@react-navigation/native';
 
 import { SafeAreaView } from '../../components/SafeAreaView';
 import { ScrollView } from '../../components/ScrollView';
@@ -8,21 +7,24 @@ import { PrimaryButton } from '../../components/Buttons';
 import { RouteStackParamList, Route } from '../../navigation';
 import { styled } from '../../theming';
 
-type HomeScreenNavigationProp = StackNavigationProp<RouteStackParamList, Route.HOME>;
-
 type Props = {
-  navigation: HomeScreenNavigationProp;
-  route: RouteProp<RouteStackParamList, Route.HOME>;
+  navigation: StackNavigationProp<RouteStackParamList, Route.HOME>;
 };
 
 const Home: FC<Props> = ({ navigation }) => (
   <>
     <SafeAreaView />
     <ScrollView
-      footer={<PrimaryButton onPress={() => navigation.navigate(Route.PRODUCTS)} title="Start" />}>
+      footer={
+        <PrimaryButton
+          testID="start-button"
+          onPress={() => navigation.navigate(Route.PRODUCTS)}
+          title="Start"
+        />
+      }>
       <ViewContainer>
-        <TextWelcome>Welcome to</TextWelcome>
-        <Text>Arled's App</Text>
+        <TextWelcome testID="greeting-text-1">Welcome to</TextWelcome>
+        <Text testID="greeting-text-2">Arled's App</Text>
       </ViewContainer>
     </ScrollView>
   </>

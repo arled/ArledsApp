@@ -36,7 +36,6 @@ const Products: FC<ProductsProps> = ({ navigation }) => {
 
   return (
     <>
-      {/* <SafeAreaView backgroundColor /> */}
       <ScrollView
         header={
           <NavigationHeader
@@ -62,7 +61,7 @@ const Products: FC<ProductsProps> = ({ navigation }) => {
             ))
           ) : (
             <View>
-              <ActivityIndicator color={theme.colors.activityIndicator} />
+              <ActivityIndicator size={'large'} color={theme.colors.activityIndicator} />
             </View>
           )}
         </ViewContainer>

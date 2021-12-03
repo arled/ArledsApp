@@ -2,9 +2,21 @@
 
 ## Build app
 
-> `yarn clean-install` <br/>
->
-> If that doesn't work run: `yarn && npx pod-install`
+Install project dependencies
+
+> `yarn`
+
+Install iOS dependencies to run on the iOS simulator:
+
+> `npx pod-install`
+
+Alternatively run:
+
+> `yarn && npx pod-install`
+
+For a clean install run:
+
+> `yarn clean-install`
 
 ## Run iOS app
 
@@ -13,6 +25,10 @@
 ## Run Android app
 
 > `yarn android`
+
+## Run unit test
+
+> `yarn test`
 
 ## App screenshots
 

@@ -7,6 +7,7 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
+    "testWatch": "jest --watch",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "clean": "watchman watch-del-all && rm -rf $TMPDIR/react-native-packager-cache-* && rm -rf $TMPDIR/metro-bundler-cache-* && rm -rf node_modules/ && rm -rf ios/build && rm -rf ios/pods && rm -rf android/build",
     "clean-install": "yarn clean && yarn && npx pod-install"
@@ -27,6 +28,8 @@
     "@babel/core": "^7.12.9",
     "@babel/runtime": "^7.12.5",
     "@react-native-community/eslint-config": "^2.0.0",
+    "@testing-library/jest-native": "^4.0.4",
+    "@testing-library/react-native": "^8.0.0",
     "@types/jest": "^26.0.23",
     "@types/lodash": "^4.14.177",
     "@types/react-native": "^0.65.0",
@@ -46,6 +49,13 @@
   },
   "jest": {
     "preset": "react-native",
+    "setupFilesAfterEnv": [
+      "@testing-library/jest-native/extend-expect"
+    ],
+    "transformIgnorePatterns": [],
+    "setupFiles": [
+      "./node_modules/react-native-gesture-handler/jestSetup.js"
+    ],
     "moduleFileExtensions": [
       "ts",
       "tsx",
