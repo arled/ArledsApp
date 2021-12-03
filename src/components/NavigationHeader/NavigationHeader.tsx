@@ -8,7 +8,7 @@ import { BACK_TITLE } from '../../constants';
 interface NavigationHeaderProps {
   title?: string;
   onBackPress: () => void;
-  rightItem?: ReactElement;
+  rightItem?: ReactElement | string | undefined;
 }
 
 const NavigationHeader: FC<NavigationHeaderProps> = ({ title, onBackPress, rightItem }) => {
@@ -27,7 +27,7 @@ const NavigationHeader: FC<NavigationHeaderProps> = ({ title, onBackPress, right
               <Text>{BACK_TITLE}</Text>
             </Pressable>
           ) : null}
-          {rightItem ? rightItem : null}
+          {rightItem ? typeof rightItem === 'string' ? <Text>{rightItem}</Text> : rightItem : null}
         </ViewNavigationItems>
       </ViewWrapper>
     </>
@@ -36,11 +36,13 @@ const NavigationHeader: FC<NavigationHeaderProps> = ({ title, onBackPress, right
 
 const Text = styled.Text`
   font-size: ${({ theme }) => theme.fontSizes.md}px;
+  color: ${({ theme }) => theme.colors.textDark};
 `;
 const TextTitle = styled.Text`
   text-transform: uppercase;
   font-weight: 600;
   font-size: ${({ theme }) => theme.fontSizes.lg}px;
+  color: ${({ theme }) => theme.colors.textDark};
 `;
 const ViewHeader = styled.View`
   flex: 1;

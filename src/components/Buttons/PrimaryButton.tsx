@@ -26,6 +26,7 @@ const TouchableOpacity = styled.TouchableOpacity`
 
 const Text = styled.Text`
   font-size: ${({ theme }) => theme.fontSizes.md}px;
+  color: ${({ theme }) => theme.colors.textDark};
   font-weight: 600;
 `;
 export { PrimaryButton };

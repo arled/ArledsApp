@@ -40,7 +40,7 @@ const ShoppingCart: FC<Props> = ({ navigation }) => {
         <NavigationHeader
           onBackPress={() => navigation.goBack()}
           title={'Cart'}
-          rightItem={<Text>Total: £{totalPrice.toFixed(2)}</Text>}
+          rightItem={`Total: £${totalPrice.toFixed(2)}`}
         />
       }>
       {cartItems && cartItems.length > 0 ? (
