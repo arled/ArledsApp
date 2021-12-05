@@ -1,7 +1,3 @@
-import merge from 'lodash/merge';
-import cloneDeep from 'lodash/cloneDeep';
-import { DefaultTheme } from 'styled-components/native';
-
 import { ColorSchemas } from 'src/constants';
 
 enum ThemePallet {
@@ -32,17 +28,8 @@ enum ThemePallet {
   BLUE_LIGHT_1 = '#2d98da',
 }
 
-const Sizes = {
-  xs: 5,
-  sm: 10,
-  md: 14,
-  lg: 20,
-  xl: 24,
-  xxl: 30,
-};
-
-const defaultTheme = {
-  colorSchema: ColorSchemas.LIGHT,
+const darkTheme = {
+  colorSchema: ColorSchemas.DARK,
   colors: {
     white: ThemePallet.WHITE,
     border: ThemePallet.GREY_1,
@@ -59,26 +46,6 @@ const defaultTheme = {
     buttonPrimaryBackground: ThemePallet.PURPLE_1,
     buttonSecondaryBackground: ThemePallet.GREY_2,
   },
-  fontSizes: Sizes,
-  paddings: Sizes,
-  margins: Sizes,
 };
 
-const themes: {
-  [ColorSchemas.LIGHT]?: any;
-  [ColorSchemas.DARK]?: any;
-} = {
-  [ColorSchemas.LIGHT]: defaultTheme, // TODO: light theme
-  [ColorSchemas.DARK]: defaultTheme, // TODO: dark theme
-};
-
-const generateTheme = (themeMode: ColorSchemas): Theme => {
-  if (themes[themeMode]) {
-    return merge(cloneDeep(defaultTheme), themes[ColorSchemas.LIGHT]);
-  }
-  return defaultTheme;
-};
-
-export default generateTheme;
-export type CustomTheme = typeof defaultTheme;
-export interface Theme extends CustomTheme, DefaultTheme {}
+export default darkTheme;

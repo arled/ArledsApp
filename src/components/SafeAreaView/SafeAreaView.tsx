@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { SafeAreaView as SAV } from 'react-native-safe-area-context';
 
-import { styled } from '../../theming';
+import { styled } from 'src/theming';
 interface PropSafeAreaViews {
   backgroundColor?: boolean;
 }

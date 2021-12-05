@@ -1,26 +1,29 @@
-import React, { FC, useEffect, useContext } from 'react';
+import React, { FC, useEffect } from 'react';
+import { RouteProp } from '@react-navigation/native';
 import { ActivityIndicator, Pressable } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { RouteProp } from '@react-navigation/native';
 
-import { ScrollView } from '../../components/ScrollView';
-import { RouteStackParamList, Route } from '../../navigation';
-import { useProducts } from '../../hooks/useProducts';
-import { NavigationHeader } from '../../components/NavigationHeader';
-import { CartContext } from '../../store/CartContext';
-import { ProductItem } from '../../components/ProductItem';
-import { styled, useTheme } from '../../theming';
+import { Cart } from 'src/components/icons';
+import { styled, useTheme } from 'src/theming';
+import { useProducts } from 'src/hooks/useProducts';
+import { useDispatch, useSelector } from 'react-redux';
+import { ScrollView } from 'src/components/ScrollView';
+import { ProductItem } from 'src/components/ProductItem';
+import { setCartItem } from 'src/state/slices/cart/thunks';
+import { RouteStackParamList, Route } from 'src/navigation';
+import { getCartItems } from 'src/state/slices/cart/selectors';
+import { NavigationHeader } from 'src/components/NavigationHeader';
 
 type ProductsScreenNavigationProp = StackNavigationProp<RouteStackParamList, Route.PRODUCTS>;
 
 type ProductsProps = {
   navigation: ProductsScreenNavigationProp;
-  route: RouteProp<RouteStackParamList, Route.PRODUCTS>;
 };
 
 const Products: FC<ProductsProps> = ({ navigation }) => {
   const { products, loadProducts } = useProducts();
-  const { cartItems, setCartItems } = useContext(CartContext);
+  const { cartItems } = useSelector(getCartItems);
+  const dispatch = useDispatch();
   const theme = useTheme();
 
   useEffect(() => {
@@ -28,10 +31,7 @@ const Products: FC<ProductsProps> = ({ navigation }) => {
   }, []);
 
   const onActionPress = (item: Product) => {
-    const isProductInCart = cartItems.find((i: Product) => i.id === item.id);
-    if (!isProductInCart) {
-      setCartItems([...cartItems, item]);
-    }
+    dispatch(setCartItem(item));
   };
 
   return (
@@ -40,10 +40,13 @@ const Products: FC<ProductsProps> = ({ navigation }) => {
         header={
           <NavigationHeader
             onBackPress={() => navigation.goBack()}
-            title={'Products'}
+            title="Products"
             rightItem={
               <Pressable onPress={() => navigation.navigate(Route.SHOPPING_CART)}>
-                <Text>{`Cart (${cartItems?.length > 0 ? cartItems?.length : 0}) `}</Text>
+                <ViewCart>
+                  <IconCart />
+                  <TextCart>{` (${cartItems?.length > 0 ? cartItems?.length : 0}) `}</TextCart>
+                </ViewCart>
               </Pressable>
             }
           />
@@ -60,9 +63,9 @@ const Products: FC<ProductsProps> = ({ navigation }) => {
               />
             ))
           ) : (
-            <View>
+            <ViewActivityIndicator>
               <ActivityIndicator size={'large'} color={theme.colors.activityIndicator} />
-            </View>
+            </ViewActivityIndicator>
           )}
         </ViewContainer>
       </ScrollView>
@@ -72,18 +75,31 @@ const Products: FC<ProductsProps> = ({ navigation }) => {
 
 const ViewContainer = styled.View`
   flex: 1;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 `;
 
-const Text = styled.Text`
+const ViewCart = styled.View`
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+`;
+
+const TextCart = styled.Text`
+  font-weight: 600;
+  color: ${({ theme }) => theme.colors.textLight};
   font-size: ${({ theme }) => theme.fontSizes.md}px;
 `;
 
-const View = styled.View`
+const ViewActivityIndicator = styled.View`
   flex: 1;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+`;
+
+const IconCart = styled(Cart)`
+  height: 22px;
+  width: 22px;
 `;
 
 export { Products };

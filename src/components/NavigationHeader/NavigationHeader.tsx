@@ -1,9 +1,9 @@
 import React, { FC, ReactElement } from 'react';
 import { Pressable } from 'react-native';
 
-import { SafeAreaView } from '../../components/SafeAreaView';
-import { styled } from '../../theming';
-import { BACK_TITLE } from '../../constants';
+import { styled } from 'src/theming';
+import { BackArrow } from 'src/components/icons';
+import { SafeAreaView } from 'src/components/SafeAreaView';
 
 interface NavigationHeaderProps {
   title?: string;
@@ -24,7 +24,7 @@ const NavigationHeader: FC<NavigationHeaderProps> = ({ title, onBackPress, right
         <ViewNavigationItems>
           {onBackPress ? (
             <Pressable onPress={onBackPress}>
-              <Text>{BACK_TITLE}</Text>
+              <IconBackArrow />
             </Pressable>
           ) : null}
           {rightItem ? typeof rightItem === 'string' ? <Text>{rightItem}</Text> : rightItem : null}
@@ -35,25 +35,31 @@ const NavigationHeader: FC<NavigationHeaderProps> = ({ title, onBackPress, right
 };
 
 const Text = styled.Text`
+  font-weight: 600;
+  color: ${({ theme }) => theme.colors.textLight};
   font-size: ${({ theme }) => theme.fontSizes.md}px;
-  color: ${({ theme }) => theme.colors.textDark};
 `;
 const TextTitle = styled.Text`
-  text-transform: uppercase;
   font-weight: 600;
+  text-transform: uppercase;
+  color: ${({ theme }) => theme.colors.textLight};
   font-size: ${({ theme }) => theme.fontSizes.lg}px;
-  color: ${({ theme }) => theme.colors.textDark};
 `;
 const ViewHeader = styled.View`
   flex: 1;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 `;
 
 const ViewNavigationItems = styled.View`
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+`;
+
+const IconBackArrow = styled(BackArrow)`
+  height: 22px;
+  width: 22px;
 `;
 
 const ViewWrapper = styled.View`

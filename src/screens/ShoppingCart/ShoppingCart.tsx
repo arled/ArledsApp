@@ -1,13 +1,15 @@
-import React, { FC, useContext, useEffect, useState } from 'react';
+import React, { FC } from 'react';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RouteProp } from '@react-navigation/native';
 
-import { ScrollView } from '../../components/ScrollView';
-import { RouteStackParamList, Route } from '../../navigation';
-import { CartContext } from '../../store/CartContext';
-import { ProductItem } from '../../components/ProductItem';
-import { NavigationHeader } from '../../components/NavigationHeader';
-import { styled } from '../../theming';
+import { ScrollView } from 'src/components/ScrollView';
+import { RouteStackParamList, Route } from 'src/navigation';
+import { ProductItem } from 'src/components/ProductItem';
+import { NavigationHeader } from 'src/components/NavigationHeader';
+import { getCartItems, getTotalPrice } from 'src/state/slices/cart/selectors';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeCartItem } from 'src/state/slices/cart/thunks';
+import { styled } from 'src/theming';
 
 type ShoppingCartScreenNavigationProp = StackNavigationProp<
   RouteStackParamList,
@@ -16,22 +18,15 @@ type ShoppingCartScreenNavigationProp = StackNavigationProp<
 
 type Props = {
   navigation: ShoppingCartScreenNavigationProp;
-  route: RouteProp<RouteStackParamList, Route.SHOPPING_CART>;
 };
 
 const ShoppingCart: FC<Props> = ({ navigation }) => {
-  const { cartItems, setCartItems } = useContext(CartContext);
-  const [totalPrice, setTotalPrice] = useState<number>(0);
-
-  useEffect(() => {
-    setTotalPrice(0);
-    for (const item of cartItems) {
-      setTotalPrice((prev) => prev + item.price);
-    }
-  }, [cartItems, setTotalPrice]);
+  const { cartItems } = useSelector(getCartItems);
+  const { totalPrice } = useSelector(getTotalPrice);
+  const dispatch = useDispatch();
 
   const handleOnDelete = (item: Product) => {
-    setCartItems(cartItems.filter((ci: Product) => ci.id != item.id));
+    dispatch(removeCartItem(item));
   };
 
   return (
@@ -39,8 +34,8 @@ const ShoppingCart: FC<Props> = ({ navigation }) => {
       header={
         <NavigationHeader
           onBackPress={() => navigation.goBack()}
-          title={'Cart'}
-          rightItem={`Total: £${totalPrice.toFixed(2)}`}
+          title="Cart"
+          rightItem={`Total: £${totalPrice}`}
         />
       }>
       {cartItems && cartItems.length > 0 ? (
@@ -48,7 +43,7 @@ const ShoppingCart: FC<Props> = ({ navigation }) => {
           <ProductItem
             key={`${item.id}-${key}`}
             product={item}
-            actionTitle={'Remove'}
+            actionTitle="Remove"
             onActionPress={handleOnDelete}
           />
         ))

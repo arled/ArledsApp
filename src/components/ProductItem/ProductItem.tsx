@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { PrimaryButton } from '../Buttons';
-import { styled } from '../../theming';
+import { styled } from 'src/theming';
 
 interface ProductItemProps {
   product: Product;
@@ -60,17 +60,19 @@ const Image = styled.Image`
 
 const TextTitle = styled.Text`
   text-transform: uppercase;
+  color: ${({ theme }) => theme.colors.textDark};
   font-size: ${({ theme }) => theme.fontSizes.md}px;
 `;
 
 const TextPrice = styled.Text`
-  font-size: ${({ theme }) => theme.fontSizes.md}px;
   font-weight: 600;
   color: ${({ theme }) => theme.colors.price};
+  font-size: ${({ theme }) => theme.fontSizes.md}px;
   margin-vertical: ${({ theme }) => theme.margins.sm}px;
 `;
 
 const TextDescription = styled.Text`
+  color: ${({ theme }) => theme.colors.textDark};
   font-size: ${({ theme }) => theme.fontSizes.sm}px;
 `;
 

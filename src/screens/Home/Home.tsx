@@ -1,17 +1,19 @@
 import React, { FC } from 'react';
 import { StackNavigationProp } from '@react-navigation/stack';
 
-import { SafeAreaView } from '../../components/SafeAreaView';
-import { ScrollView } from '../../components/ScrollView';
-import { PrimaryButton } from '../../components/Buttons';
-import { RouteStackParamList, Route } from '../../navigation';
-import { styled } from '../../theming';
+import { SafeAreaView } from 'src/components/SafeAreaView';
+import { ScrollView } from 'src/components/ScrollView';
+import { PrimaryButton } from 'src/components/Buttons';
+import { RouteStackParamList, Route } from 'src/navigation';
+import { styled } from 'src/theming';
 
-type Props = {
-  navigation: StackNavigationProp<RouteStackParamList, Route.HOME>;
+type HomeScreenNavigationProp = StackNavigationProp<RouteStackParamList, Route.SHOPPING_CART>;
+
+type HomeProps = {
+  navigation: HomeScreenNavigationProp;
 };
 
-const Home: FC<Props> = ({ navigation }) => (
+const Home: FC<HomeProps> = ({ navigation }) => (
   <>
     <SafeAreaView />
     <ScrollView

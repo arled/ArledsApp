@@ -1,10 +1,9 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import { Home } from '../screens/Home';
 import { Products } from '../screens/Products';
 import { ShoppingCart } from '../screens/ShoppingCart';
-import { CartContext } from '../store/CartContext';
 import { Route } from './route';
 
 const RootStack = createStackNavigator();

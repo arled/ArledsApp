@@ -1,6 +1,6 @@
 import React, { FC, ReactElement } from 'react';
 
-import { styled } from '../../theming';
+import { styled } from 'src/theming';
 interface ScrollViewProps {
   header?: ReactElement;
   footer?: ReactElement;
