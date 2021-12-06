@@ -1,8 +1,8 @@
 import React from 'react';
 import { fireEvent, render } from '@testing-library/react-native';
 
-import { ThemeProvider } from '../../src/theming/ThemeProvider';
-import { Home } from '../../src/screens/Home';
+import { ThemeProvider } from '@app-root/theming/ThemeProvider';
+import { Home } from '.';
 
 const createTestProps = {
   navigation: {

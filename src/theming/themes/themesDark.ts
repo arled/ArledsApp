@@ -1,4 +1,4 @@
-import { ColorSchemas } from 'src/constants';
+import { ColorSchemas } from '@app-root/constants';
 
 enum ThemePallet {
   WHITE = '#ffffff',

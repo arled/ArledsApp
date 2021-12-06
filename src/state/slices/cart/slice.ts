@@ -1,13 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import { updateTotalPrice } from '@app-root/lib/cart';
+
 interface CarState {
   cartItems: Array<Product>;
-  totalPrice: number;
+  totalPrice: string;
 }
 
 const initialState: CarState = {
   cartItems: [],
-  totalPrice: 0,
+  totalPrice: '0',
 };
 
 const cartSlice = createSlice({
@@ -30,12 +32,6 @@ const cartSlice = createSlice({
     },
   },
 });
-
-//.toFixed(2)
-const updateTotalPrice = (products: Array<Product>): number =>
-  products
-    .reduce((acc: number, cur: Product) => acc + cur.price, 0)
-    .toFixed(2) as unknown as number;
 
 const { setCartItemAction, removeCartItemAction } = cartSlice.actions;
 const reducer = cartSlice.reducer;

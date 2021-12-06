@@ -2,7 +2,7 @@ import merge from 'lodash/merge';
 import cloneDeep from 'lodash/cloneDeep';
 import { DefaultTheme } from 'styled-components/native';
 
-import { ColorSchemas } from 'src/constants';
+import { ColorSchemas } from '@app-root/constants';
 
 enum ThemePallet {
   WHITE = '#ffffff',

@@ -1,9 +1,9 @@
 import React, { FC, ReactElement } from 'react';
 import { Pressable } from 'react-native';
 
-import { styled } from 'src/theming';
-import { BackArrow } from 'src/components/icons';
-import { SafeAreaView } from 'src/components/SafeAreaView';
+import { styled } from '@app-root/theming';
+import { BackArrow } from '@app-root/components/icons';
+import { SafeAreaView } from '@app-root/components/SafeAreaView';
 
 interface NavigationHeaderProps {
   title?: string;

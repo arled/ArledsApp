@@ -1,18 +1,17 @@
 import React, { FC, useEffect } from 'react';
-import { RouteProp } from '@react-navigation/native';
 import { ActivityIndicator, Pressable } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 
-import { Cart } from 'src/components/icons';
-import { styled, useTheme } from 'src/theming';
-import { useProducts } from 'src/hooks/useProducts';
+import { Cart } from '@app-root/components/icons';
+import { styled, useTheme } from '@app-root/theming';
+import { useProducts } from '@app-root/hooks/useProducts';
 import { useDispatch, useSelector } from 'react-redux';
-import { ScrollView } from 'src/components/ScrollView';
-import { ProductItem } from 'src/components/ProductItem';
-import { setCartItem } from 'src/state/slices/cart/thunks';
-import { RouteStackParamList, Route } from 'src/navigation';
-import { getCartItems } from 'src/state/slices/cart/selectors';
-import { NavigationHeader } from 'src/components/NavigationHeader';
+import { ScrollView } from '@app-root/components/ScrollView';
+import { ProductItem } from '@app-root/components/ProductItem';
+import { setCartItem } from '@app-root/state/slices/cart/thunks';
+import { RouteStackParamList, Route } from '@app-root/navigation';
+import { getCartItems } from '@app-root/state/slices/cart/selectors';
+import { NavigationHeader } from '@app-root/components/NavigationHeader';
 
 type ProductsScreenNavigationProp = StackNavigationProp<RouteStackParamList, Route.PRODUCTS>;
 
@@ -25,10 +24,7 @@ const Products: FC<ProductsProps> = ({ navigation }) => {
   const { cartItems } = useSelector(getCartItems);
   const dispatch = useDispatch();
   const theme = useTheme();
-
-  useEffect(() => {
-    loadProducts();
-  }, []);
+  loadProducts();
 
   const onActionPress = (item: Product) => {
     dispatch(setCartItem(item));

@@ -1,26 +1,22 @@
 import React, { FC } from 'react';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { RouteProp } from '@react-navigation/native';
-
-import { ScrollView } from 'src/components/ScrollView';
-import { RouteStackParamList, Route } from 'src/navigation';
-import { ProductItem } from 'src/components/ProductItem';
-import { NavigationHeader } from 'src/components/NavigationHeader';
-import { getCartItems, getTotalPrice } from 'src/state/slices/cart/selectors';
 import { useDispatch, useSelector } from 'react-redux';
-import { removeCartItem } from 'src/state/slices/cart/thunks';
-import { styled } from 'src/theming';
 
-type ShoppingCartScreenNavigationProp = StackNavigationProp<
-  RouteStackParamList,
-  Route.SHOPPING_CART
->;
+import { ScrollView } from '@app-root/components/ScrollView';
+import { RouteStackParamList, Route } from '@app-root/navigation';
+import { ProductItem } from '@app-root/components/ProductItem';
+import { NavigationHeader } from '@app-root/components/NavigationHeader';
+import { getCartItems, getTotalPrice } from '@app-root/state/slices/cart/selectors';
+import { removeCartItem } from '@app-root/state/slices/cart/thunks';
+import { styled } from '@app-root/theming';
 
-type Props = {
-  navigation: ShoppingCartScreenNavigationProp;
+type CartScreenNavigationProp = StackNavigationProp<RouteStackParamList, Route.SHOPPING_CART>;
+
+type CartProps = {
+  navigation: CartScreenNavigationProp;
 };
 
-const ShoppingCart: FC<Props> = ({ navigation }) => {
+const Cart: FC<CartProps> = ({ navigation }) => {
   const { cartItems } = useSelector(getCartItems);
   const { totalPrice } = useSelector(getTotalPrice);
   const dispatch = useDispatch();
@@ -58,4 +54,4 @@ const Text = styled.Text`
   font-size: ${({ theme }) => theme.fontSizes.md}px;
 `;
 
-export { ShoppingCart };
+export { Cart };

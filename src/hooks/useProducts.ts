@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { getProducts } from '../api/getProducts';
+import { getProducts } from '@app-root/api/getProducts';
 
 const useProducts = () => {
   const [products, setProducts] = useState<Array<Product>>([]);

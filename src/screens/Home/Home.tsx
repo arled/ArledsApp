@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 import { StackNavigationProp } from '@react-navigation/stack';
 
-import { SafeAreaView } from 'src/components/SafeAreaView';
-import { ScrollView } from 'src/components/ScrollView';
-import { PrimaryButton } from 'src/components/Buttons';
-import { RouteStackParamList, Route } from 'src/navigation';
-import { styled } from 'src/theming';
+import { SafeAreaView } from '@app-root/components/SafeAreaView';
+import { ScrollView } from '@app-root/components/ScrollView';
+import { PrimaryButton } from '@app-root/components/Buttons';
+import { RouteStackParamList, Route } from '@app-root/navigation';
+import { styled } from '@app-root/theming';
 
 type HomeScreenNavigationProp = StackNavigationProp<RouteStackParamList, Route.SHOPPING_CART>;
 

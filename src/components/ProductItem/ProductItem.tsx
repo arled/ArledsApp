@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { PrimaryButton } from '../Buttons';
-import { styled } from 'src/theming';
+import { styled } from '@app-root/theming';
 
 interface ProductItemProps {
   product: Product;

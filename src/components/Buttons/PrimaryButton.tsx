@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import { styled } from 'src/theming';
+import { styled } from '@app-root/theming';
 
 interface PrimaryButtonProps {
   title: string;
